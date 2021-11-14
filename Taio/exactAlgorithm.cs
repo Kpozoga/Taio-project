@@ -14,6 +14,7 @@ namespace Taio
             int m = Math.Max(graph1.GetLength(0), graph2.GetLength(0));
             bool[,] graphBase = new bool[n, n];
             bool[,] graphPermuted = new bool[m, m];
+            // wykonujemy głębokie kopie, zawsze będziemy permutować większą macierz
             if (graph1.GetLength(0) > graph2.GetLength(0))
             {
                 for (int i = 0; i < n; i++)
@@ -38,6 +39,7 @@ namespace Taio
 
         public static void Permute(int k, bool[,] graphBase, ref bool[,] graphPermuted, ref int dist)
         {
+            //http://algorytmika.wikidot.com/exponential-permut stąd pochodzi algorytm permutacji
             if (k == 1)
             {
                 int tmpDist = Util.GetDistance(graphBase, graphPermuted);
@@ -55,7 +57,7 @@ namespace Taio
             }
         }
 
-        public static void Swap(ref bool[,] graph, int i, int j)
+        public static void Swap(ref bool[,] graph, int i, int j) // zamiana i-tego i j-tego wierzchołka
         {
             int n = graph.GetLength(0);
             bool[,] graphCopy = new bool[n, n];
