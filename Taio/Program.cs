@@ -19,7 +19,7 @@ namespace Taio
         }
         public static int GetDistance(bool[,] graph1, bool[,] graph2, int[] equivalence)
         {
-            return CountEdges(graph1) + CountEdges(graph2) - 2 * CountEdges(GetSubgraph(graph1, graph2)) + Math.Abs(graph1.GetLength(0) - graph2.GetLength(0));
+            return CountEdges(graph1) + CountEdges(graph2) - 2 * CountEdges(GetSubgraph(graph1, graph2, equivalence)) + Math.Abs(graph1.GetLength(0) - graph2.GetLength(0));
         }
         public static bool[,] ReadGraph(int n)
         {
@@ -36,7 +36,7 @@ namespace Taio
             }
             return graph;
         }
-        public static bool[,] GetSubgraph(bool[,] g1, bool[,] g2)
+        public static bool[,] GetSubgraph(bool[,] g1, bool[,] g2, int[] eq)
         {
             int nMin, nMax;
             if(g1.GetLength(0) > g2.GetLength(0))
@@ -52,7 +52,8 @@ namespace Taio
             var subgraph = new bool[nMax, nMax];
             for(int i=0;i<nMin;i++)               
                 for(int j=0;j<nMin;j++)
-                    subgraph[i,j] = g1[i,j] && g2[i,j];
+                    if(eq[i]!=-1 && eq[j]!=-1)
+                        subgraph[i,j] = g1[i,j] && g2[eq[i],eq[j]];
             return subgraph;
         }
     }
@@ -67,6 +68,10 @@ namespace Taio
             var graph2 = Util.ReadGraph(n2);
             var result = Approximation.GetDistance(graph1, graph1);
             Console.WriteLine(result);
+            /*for (int i = 0; i < result.nodes.GetLength(0); i++)
+            {
+                Console.Write(" "+result.nodes[i]);
+            }*/
         }
     }
 }
