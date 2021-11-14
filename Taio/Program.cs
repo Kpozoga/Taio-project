@@ -7,11 +7,12 @@ namespace Taio
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            var graph1 = new bool[3, 3];
-            graph1[1, 0] = true;
-            graph1[1, 2] = true;
+            int.TryParse(Console.ReadLine(), out int n1);
+            var graph1 = Util.ReadGraph(n1);
+            int.TryParse(Console.ReadLine(), out int n2);
+            var graph2 = Util.ReadGraph(n2);
             var result = Approximation.GetDistance(graph1, graph1);
+            Console.WriteLine(result);      
         }
     }
 }
