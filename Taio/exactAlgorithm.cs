@@ -9,7 +9,7 @@ namespace Taio
     {
         public static int GetExactDistance(bool[,] graph1, bool[,] graph2)
         {
-            int dist = 0;
+            int dist = int.MaxValue;
             int n = Math.Min(graph1.GetLength(0), graph2.GetLength(0));
             int m = Math.Max(graph1.GetLength(0), graph2.GetLength(0));
             bool[,] graphBase = new bool[n, n];
@@ -67,8 +67,10 @@ namespace Taio
 
             for (int k = 0; k < n; k++)
             {
-                graph[i, k] = graphCopy[k, j];
-                graph[k, i] = graphCopy[j, k];
+                graph[i, k] = graphCopy[j, k];
+                graph[j, k] = graphCopy[i, k];
+                graph[k, i] = graphCopy[k, j];
+                graph[k, j] = graphCopy[k, i];
             }
         }
 
