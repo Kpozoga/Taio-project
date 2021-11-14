@@ -11,7 +11,7 @@ namespace Taio
             var graph1 = Util.ReadGraph(n1);
             int.TryParse(Console.ReadLine(), out int n2);
             var graph2 = Util.ReadGraph(n2);
-            var result = Approximation.GetDistance(graph1, graph1);
+            var result = Approximation.GetDistance(graph1, graph2);
             Console.WriteLine(result);      
         }
     }
