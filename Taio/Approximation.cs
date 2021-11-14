@@ -4,32 +4,10 @@ using System.Collections.Immutable;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net.Http.Headers;
+using Taio.Utils;
 
 namespace Taio
 {
-    struct Vertex
-    {
-        public int index;
-        public int inDeg;
-        public int outDeg;
-
-        public Vertex(int index, int inDeg, int outDeg)
-        {
-            this.index = index;
-            this.inDeg = inDeg;
-            this.outDeg = outDeg;
-        }
-        public Vertex(int index)
-        {
-            this.index = index;
-            this.inDeg = 0;
-            this.outDeg = 0;
-        }
-        public int GetValue()
-        {
-            return this.outDeg - this.inDeg;
-        }
-    }
     public static class Approximation
     {
         private static Vertex[] CalculateDegrees(bool[,] graph)
