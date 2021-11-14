@@ -40,7 +40,7 @@ namespace Taio
         public static void Permute(int k, bool[,] graphBase, ref bool[,] graphPermuted, ref int dist)
         {
             //http://algorytmika.wikidot.com/exponential-permut stąd pochodzi algorytm permutacji
-            if (k == 1)
+            if (k == 1) // sprawdziłam, że wchodzimy do tego warunku tyle razy, ile jest permutacji
             {
                 int tmpDist = Util.GetDistance(graphBase, graphPermuted);
                 if (tmpDist < dist)
