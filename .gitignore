@@ -1,6 +1,6 @@
 .idea
 .vs
 Taio/bin
-Taio/obj
+/Taio/obj
 Taio/obj/Debug
-Taio\obj
+\\Taio\\obj
