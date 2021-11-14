@@ -115,7 +115,7 @@ namespace Taio
             inVertices2.Add(equivalence[max]);*/
             while(degrees1.Count>0 && degrees2.Count>0)
             {
-                Console.WriteLine("{0} {1}",degrees1.Count, degrees2.Count);
+                //Console.WriteLine("{0} {1}",degrees1.Count, degrees2.Count);
                 Vertex[] tmp1 = GetNeighbours(graph1, inVertices1);
                 Vertex[] tmp2 = GetNeighbours(graph1, inVertices2);
                 int best1, best2;
