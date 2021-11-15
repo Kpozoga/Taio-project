@@ -72,6 +72,12 @@ namespace Taio
                 graph[k, i] = graphCopy[k, j];
                 graph[k, j] = graphCopy[k, i];
             }
+            bool tmp = graph[i, i];
+            graph[i, i] = graph[j, i];
+            graph[j, i] = tmp;
+            tmp = graph[i, j];
+            graph[i, j] = graph[j, j];
+            graph[j, j] = tmp;
         }
 
     }
