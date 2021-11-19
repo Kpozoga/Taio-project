@@ -122,8 +122,8 @@ namespace Taio
                 if (tmp1.Length == 0 || tmp2.Length == 0)
                 {
                     //get max indexes
-                    best1 = FindMaxIndex(degrees1);
-                    best2 = FindMaxIndex(degrees2);
+                    best1 = degrees1[FindMaxIndex(degrees1)].index;
+                    best2 = degrees1[FindMaxIndex(degrees2)].index;
                 }
                 else
                 {
