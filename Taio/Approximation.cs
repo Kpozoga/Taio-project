@@ -117,7 +117,7 @@ namespace Taio
             {
                 //Console.WriteLine("{0} {1}",degrees1.Count, degrees2.Count);
                 Vertex[] tmp1 = GetNeighbours(graph1, inVertices1);
-                Vertex[] tmp2 = GetNeighbours(graph1, inVertices2);
+                Vertex[] tmp2 = GetNeighbours(graph2, inVertices2);
                 int best1, best2;
                 if (tmp1.Length == 0 || tmp2.Length == 0)
                 {
@@ -135,7 +135,7 @@ namespace Taio
                         foreach (Vertex v2 in tmp2)
                         {
                             int dist = (int)Math.Pow(v1.inDeg - v2.inDeg, 2) + (int)Math.Pow(v1.outDeg - v2.outDeg, 2);
-                            int bestDist = (int)Math.Pow(v1.inDeg - v2.inDeg, 2) + (int)Math.Pow(v1.outDeg - v2.outDeg, 2);
+                            int bestDist = (int)Math.Pow(mb1.inDeg - mb2.inDeg, 2) + (int)Math.Pow(mb1.outDeg - mb2.outDeg, 2);
                             if (dist < bestDist || (dist==bestDist && v1.inDeg+v1.outDeg>=v2.inDeg+v2.outDeg))
                             {
                                 mb1 = v1;

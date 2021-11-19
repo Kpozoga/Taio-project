@@ -19,11 +19,11 @@ namespace Taio.Utils
         }
         public static int GetDistance(bool[,] graph1, bool[,] graph2, int[] equivalence)
         {
-            return CountEdges(graph1) + CountEdges(graph2) - 2 * CountEdges(GetSubgraph(graph1, graph2, equivalence)) - Math.Abs(graph1.GetLength(0) - graph2.GetLength(0));
+            return CountEdges(graph1) + CountEdges(graph2) - 2 * CountEdges(GetSubgraph(graph1, graph2, equivalence)) + Math.Abs(graph1.GetLength(0) - graph2.GetLength(0));
         }
         public static int GetDistance(bool[,] graph1, bool[,] graph2)
         {
-            return CountEdges(graph1) + CountEdges(graph2) - 2 * CountEdges(GetSubgraph(graph1, graph2)) - Math.Abs(graph1.GetLength(0) - graph2.GetLength(0));
+            return CountEdges(graph1) + CountEdges(graph2) - 2 * CountEdges(GetSubgraph(graph1, graph2)) + Math.Abs(graph1.GetLength(0) - graph2.GetLength(0));
         }
         public static bool[,] GetSubgraph(bool[,] g1, bool[,] g2, int[] eq)
         {
