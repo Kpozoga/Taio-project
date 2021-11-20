@@ -39,8 +39,10 @@ namespace Taio
             var result = Approximation.GetDistance(graph1, graph2);
             Console.WriteLine("Approximation: {0}", result.distance);
             Util.WriteGraph(graph1, graph2, result.nodes);
-            int exactDist = ExactAlgorithm.GetExactDistance(graph1, graph2);
-            Console.WriteLine("Exact algorithm: {0}", exactDist);
+
+            ExactAlgorithm.calculateExactAlgorithm(graph1, graph2);
+
+            Console.WriteLine("Please, press any key to continue...");
             Console.ReadKey();
         }
     }

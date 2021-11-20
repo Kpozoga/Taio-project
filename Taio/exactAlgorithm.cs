@@ -7,6 +7,13 @@ namespace Taio
 {
     public static class ExactAlgorithm
     {
+        public static void calculateExactAlgorithm(bool[,] graph1, bool[,] graph2)
+        {
+            Console.WriteLine("---Exact algorithm---");
+            int exactDist = ExactAlgorithm.GetExactDistance(graph1, graph2);
+            Console.WriteLine("Distance between the graphs above: {0}", exactDist);
+
+        }
         public static int GetExactDistance(bool[,] graph1, bool[,] graph2)
         {
             int dist = int.MaxValue;
@@ -33,18 +40,26 @@ namespace Taio
                     for (int j = 0; j < m; j++)
                         graphPermuted[i, j] = graph2[i, j];
             }
-            Permute(m, graphBase, ref graphPermuted, ref dist);
-            return dist;
+            bool[,] closestGraph = Permute(m, graphBase, ref graphPermuted, ref dist);
+            PrintGraphs(graphBase, closestGraph);
+            return (dist);
         }
 
-        public static void Permute(int k, bool[,] graphBase, ref bool[,] graphPermuted, ref int dist)
+        public static bool[,] Permute(int k, bool[,] graphBase, ref bool[,] graphPermuted, ref int dist)
         {
+            int n = graphPermuted.GetLength(0);
+            bool[,] closestGraph = new bool[n, n];
             //http://algorytmika.wikidot.com/exponential-permut stąd pochodzi algorytm permutacji
             if (k == 1) // sprawdziłam, że wchodzimy do tego warunku tyle razy, ile jest permutacji
             {
                 int tmpDist = Util.GetDistance(graphBase, graphPermuted);
                 if (tmpDist < dist)
+                {
                     dist = tmpDist;
+                    for (int i = 0; i < n; i++)
+                        for (int j = 0; j < n; j++)
+                            closestGraph[i, j] = graphPermuted[i, j];
+                }
             }
             else
             {
@@ -55,6 +70,8 @@ namespace Taio
                     Swap(ref graphPermuted, i, k - 1);
                 }
             }
+
+            return closestGraph;
         }
 
         public static void Swap(ref bool[,] graph, int i, int j) // zamiana i-tego i j-tego wierzchołka
@@ -78,6 +95,11 @@ namespace Taio
             tmp = graph[i, j];
             graph[i, j] = graph[j, j];
             graph[j, j] = tmp;
+        }
+
+        public static void PrintGraphs(bool[,] graph1, bool[,] graph2)
+        {
+            Console.WriteLine("graph1, graph2");
         }
 
     }
