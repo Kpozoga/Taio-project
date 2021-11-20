@@ -7,9 +7,9 @@ namespace Taio
     {
         static void Main(string[] args)
         {
-            bool[,] graph1=null, graph2=null;
+            bool[,] graph1 = null, graph2 = null;
             bool pr = true;
-            if (args!=null && args.Length > 0)
+            if (args != null && args.Length > 0)
             {
                 pr = false;
                 try
@@ -18,20 +18,43 @@ namespace Taio
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Exception in reading file "+args[0]+". Get data from console");
+                    Console.WriteLine("Exception in reading file " + args[0] + ". Get data from console");
                     pr = true;
                 }
-                if(!pr)
-                    Console.WriteLine(args[0]+"File loaded successfully");
+                if (!pr)
+                    Console.WriteLine(args[0] + " File loaded successfully");
             }
             else
             {
                 Console.WriteLine("No file provided in args. Get data from console.");
             }
-            if(pr)
+            bool pr2 = true;
+            int n1 = 0;
+            if (pr)
             {
                 Console.WriteLine("Please, enter data: ");
-                int.TryParse(Console.ReadLine(), out int n1);
+                string line = Console.ReadLine();
+                if (!int.TryParse(line, out n1))
+                {
+                    pr2 = false;
+                    try
+                    {
+                        (graph1, graph2) = Util.ReadFromFile(line);
+
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("Exception in reading file " + line + ". Please enter a matrix:");
+                        pr2 = true;
+                    }
+                    if (!pr2)
+                        Console.WriteLine(line + " File loaded successfully");
+                }
+
+            }
+            if (pr && pr2)
+            {
+
                 graph1 = Util.ReadGraph(n1);
                 int.TryParse(Console.ReadLine(), out int n2);
                 graph2 = Util.ReadGraph(n2);
@@ -43,7 +66,11 @@ namespace Taio
             ExactAlgorithm.calculateExactAlgorithm(graph1, graph2);
 
             Console.WriteLine("Please, press any key to continue...");
-            Console.ReadKey();
+            try
+            {
+                Console.ReadKey();
+            }
+            catch (Exception) { }
         }
     }
 }
