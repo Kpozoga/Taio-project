@@ -32,7 +32,7 @@ namespace Taio
             int n1 = 0;
             if (pr)
             {
-                Console.WriteLine("Please, enter data: ");
+                Console.WriteLine("Please, enter path to the file: ");
                 string line = Console.ReadLine();
                 if (!int.TryParse(line, out n1))
                 {
@@ -60,11 +60,12 @@ namespace Taio
                 graph2 = Util.ReadGraph(n2);
             }
 
+            Console.WriteLine();
+            Console.WriteLine("---Graphs extracted from the file---");
             Util.PrintGraphs(graph1, graph2, "graph 1", "graph 2");
+            Console.WriteLine();
 
-            var result = Approximation.GetDistance(graph1, graph2);
-            Console.WriteLine("Approximation: {0}", result.distance);
-            Util.WriteGraph(graph1, graph2, result.nodes);
+            Approximation.CalculateApproximation(graph1, graph2);
 
             ExactAlgorithm.calculateExactAlgorithm(graph1, graph2);
 

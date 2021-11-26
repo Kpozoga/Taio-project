@@ -3,8 +3,9 @@ using System.Linq;
 
 namespace Taio.Utils
 {
-    class Util
+    public static class Util
     {
+        public static int ConsoleWidth { get { return 100; } }
         private static int CountEdges(bool[,] graph)
         {
             int ret = 0;
@@ -111,12 +112,11 @@ namespace Taio.Utils
             return (graph1, graph2);
         }
 
-        static public void WriteGraph(bool[,] graph1, bool[,] graph2, int[] equivalence)
+        static public void WriteGraph(bool[,] graph1, bool[,] graph2, string label1, string label2, int[] equivalence)
         {
-            const int consoleWidth = 40;
             int n1 = graph1.GetLength(0);
             int n2 = graph2.GetLength(0);
-            if (Math.Max(n1, n2) > consoleWidth) //not writing graph because it is too large
+            if (Math.Max(n1, n2) > ConsoleWidth) //not writing graph because it is too large
                 return;
             (int i1, int i2)[] table = new (int,int)[Math.Max(n1,n2)];
             bool[] tmpGraph2 = new bool[n2];
@@ -148,36 +148,36 @@ namespace Taio.Utils
                     }
                 }
             }
-            if (n1 + n2 + 1 < consoleWidth)
+            if (n1 + n2 + 1 < ConsoleWidth)
             {
                 //write two graphs next to each other
-                Console.Write(n1);
-                for (int i = (int)Math.Ceiling(Math.Log10(n1 + 1)); i < n1 + 1; i++)
+                Console.Write("{0}", label1);
+                for (int i = n1 * 2 + 4; i > label1.Length; i--)
                 {
                     Console.Write(' ');
                 }
-                Console.WriteLine(n2);
+                Console.WriteLine("{0}", label2);
                 for (int i = 0; i < Math.Min(n1, n2); i++)
                 {
                     for(int j=0;j<n1;j++)
-                        Console.Write(graph1[table[i].i1, table[j].i1] ? 1 : 0);
-                    Console.Write(" ");
+                        Console.Write("{0} ", graph1[table[i].i1, table[j].i1] ? 1 : 0);
+                    Console.Write("    ");
                     for(int j=0;j<n2;j++)
-                        Console.Write(graph2[table[i].i2, table[j].i2] ? 1 : 0);
+                        Console.Write("{0} ", graph2[table[i].i2, table[j].i2] ? 1 : 0);
                     Console.WriteLine();
                 }
                 for (int i = Math.Min(n1,n2); i < n1; i++)
                 {
                     for(int j=0;j<n1;j++)
-                        Console.Write(graph1[table[i].i1, table[j].i1] ? 1 : 0);
+                        Console.Write("{0} ", graph1[table[i].i1, table[j].i1] ? 1 : 0);
                     Console.WriteLine();
                 }
                 for (int i = Math.Min(n1,n2); i < n2; i++)
                 {
                     for(int j=0;j<=n1;j++)
-                        Console.Write(" ");
+                        Console.Write("  ");
                     for(int j=0;j<n2;j++)
-                        Console.Write(graph2[table[i].i2, table[j].i2] ? 1 : 0);
+                        Console.Write("{0} ", graph2[table[i].i2, table[j].i2] ? 1 : 0);
                     Console.WriteLine();
                 }
             }
@@ -188,14 +188,14 @@ namespace Taio.Utils
                 for (int i = 0; i < n1; i++)
                 {
                     for (int j = 0; j < n1; j++)
-                        Console.Write(graph1[table[i].i1, table[j].i1] ? 1 : 0);
+                        Console.Write("{0} ", graph1[table[i].i1, table[j].i1] ? 1 : 0);
                     Console.WriteLine();
                 }
                 Console.WriteLine(n2);
                 for (int i = 0; i < n2; i++)
                 {
                     for (int j = 0; j < n2; j++)
-                        Console.Write(graph2[table[i].i2, table[j].i2] ? 1 : 0);
+                        Console.Write("{0} ", graph2[table[i].i2, table[j].i2] ? 1 : 0);
                     Console.WriteLine();
                 }
             }
@@ -204,13 +204,15 @@ namespace Taio.Utils
 
         public static void PrintGraphs(bool[,] graph1, bool[,] graph2, string label1, string label2)
         {
-            const int consoleWidth = 200;
             int n1 = graph1.GetLength(0);
             int n2 = graph2.GetLength(0);
-            if (Math.Max(n1, n2) > consoleWidth) //not writing graph because it is too large
+            if (Math.Max(n1, n2) > ConsoleWidth)
+            {
+                Console.WriteLine("Graphs too large to be printed to console.");
                 return;
+            }
 
-            if (n1 + n2 + 1 < consoleWidth)
+            if (2* n1 + 2 * n2 + 4 < ConsoleWidth)
             {
                 //write two graphs next to each other
                 Console.Write("{0}", label1);
@@ -247,14 +249,14 @@ namespace Taio.Utils
             else
             {
                 //write second graph after first one
-                Console.WriteLine("{0}", label1);
+                Console.WriteLine("{0} ", label1);
                 for (int i = 0; i < n1; i++)
                 {
                     for (int j = 0; j < n1; j++)
                         Console.Write(graph1[i, j] ? 1 : 0);
                     Console.WriteLine();
                 }
-                Console.WriteLine("{0}", label2);
+                Console.WriteLine("{0} ", label2);
                 for (int i = 0; i < n2; i++)
                 {
                     for (int j = 0; j < n2; j++)

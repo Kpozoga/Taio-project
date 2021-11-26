@@ -154,5 +154,15 @@ namespace Taio
             }
             return (Util.GetDistance(graph1,graph2,equivalence), equivalence);
         }
-    }
+
+        public static void CalculateApproximation(bool[,] graph1, bool[,] graph2)
+        {
+            Console.WriteLine("---Approximation algorithm---");
+            var result = Approximation.GetDistance(graph1, graph2);
+            Util.WriteGraph(graph1, graph2, "graph1", "graph2", result.nodes);
+            Console.WriteLine("Distance between the graphs above: {0}", result.distance);
+            Console.WriteLine();
+            Console.WriteLine();
+        }
+    }   
 }
