@@ -237,7 +237,8 @@ namespace Taio.Utils
                 for (int i = Math.Min(n1, n2); i < n2; i++)
                 {
                     for (int j = 0; j <= n1; j++)
-                        Console.Write("    ");
+                        Console.Write("  ");
+                    Console.Write("  ");
                     for (int j = 0; j < n2; j++)
                         Console.Write("{0} ", graph2[i, j] ? 1 : 0);
                     Console.WriteLine();
