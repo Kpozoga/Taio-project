@@ -201,5 +201,67 @@ namespace Taio.Utils
             }
             Console.WriteLine();
         }
+
+        public static void PrintGraphs(bool[,] graph1, bool[,] graph2, string label1, string label2)
+        {
+            const int consoleWidth = 200;
+            int n1 = graph1.GetLength(0);
+            int n2 = graph2.GetLength(0);
+            if (Math.Max(n1, n2) > consoleWidth) //not writing graph because it is too large
+                return;
+
+            if (n1 + n2 + 1 < consoleWidth)
+            {
+                //write two graphs next to each other
+                Console.Write("{0}", label1);
+                for (int i = n1 * 2 + 4; i > label1.Length; i--)
+                {
+                    Console.Write(' ');
+                }
+                Console.WriteLine("{0}", label2);
+                for (int i = 0; i < Math.Min(n1, n2); i++)
+                {
+                    for (int j = 0; j < n1; j++)
+                        Console.Write("{0} ", graph1[i, j] ? 1 : 0);
+                    Console.Write("    ");
+                    for (int j = 0; j < n2; j++)
+                        Console.Write("{0} ", graph2[i, j] ? 1 : 0);
+                    Console.WriteLine();
+                }
+                for (int i = Math.Min(n1, n2); i < n1; i++)
+                {
+                    for (int j = 0; j < n1; j++)
+                        Console.Write("{0} ", graph1[i, j] ? 1 : 0);
+                    Console.WriteLine();
+                }
+                for (int i = Math.Min(n1, n2); i < n2; i++)
+                {
+                    for (int j = 0; j <= n1; j++)
+                        Console.Write("    ");
+                    for (int j = 0; j < n2; j++)
+                        Console.Write("{0} ", graph2[i, j] ? 1 : 0);
+                    Console.WriteLine();
+                }
+            }
+            else
+            {
+                //write second graph after first one
+                Console.WriteLine("{0}", label1);
+                for (int i = 0; i < n1; i++)
+                {
+                    for (int j = 0; j < n1; j++)
+                        Console.Write(graph1[i, j] ? 1 : 0);
+                    Console.WriteLine();
+                }
+                Console.WriteLine("{0}", label2);
+                for (int i = 0; i < n2; i++)
+                {
+                    for (int j = 0; j < n2; j++)
+                        Console.Write(graph2[i, j] ? 1 : 0);
+                    Console.WriteLine();
+                }
+            }
+            Console.WriteLine();
+        }
     }
 }

@@ -59,6 +59,9 @@ namespace Taio
                 int.TryParse(Console.ReadLine(), out int n2);
                 graph2 = Util.ReadGraph(n2);
             }
+
+            Util.PrintGraphs(graph1, graph2, "graph 1", "graph 2");
+
             var result = Approximation.GetDistance(graph1, graph2);
             Console.WriteLine("Approximation: {0}", result.distance);
             Util.WriteGraph(graph1, graph2, result.nodes);
