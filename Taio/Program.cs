@@ -9,6 +9,7 @@ namespace Taio
         {
             bool[,] graph1 = null, graph2 = null;
             bool pr = true;
+            bool computeExact = true;
             if (args != null && args.Length > 0)
             {
                 pr = false;
@@ -28,6 +29,10 @@ namespace Taio
             {
                 Console.WriteLine("No file provided in args. Get data from console.");
             }
+            if (args != null && args.Length > 1)
+                if (args[1] == "approx-only")
+                    computeExact = false;
+
             bool pr2 = true;
             int n1 = 0;
             if (pr)
@@ -67,8 +72,9 @@ namespace Taio
 
             Approximation.CalculateApproximation(graph1, graph2);
 
-            if (ExactAlgorithm.AskUserWhetherCalculateBigGraph(graph1, graph2))
-                ExactAlgorithm.CalculateExactAlgorithm(graph1, graph2);
+            if (computeExact)
+                if (ExactAlgorithm.AskUserWhetherCalculateBigGraph(graph1, graph2))
+                    ExactAlgorithm.CalculateExactAlgorithm(graph1, graph2);
 
             Console.WriteLine("Please, press any key to continue...");
             try
