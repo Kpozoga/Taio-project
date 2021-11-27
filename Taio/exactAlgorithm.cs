@@ -7,7 +7,7 @@ namespace Taio
 {
     public static class ExactAlgorithm
     {
-        public static void calculateExactAlgorithm(bool[,] graph1, bool[,] graph2)
+        public static void CalculateExactAlgorithm(bool[,] graph1, bool[,] graph2)
         {
             Console.WriteLine("---Exact algorithm---");
             int exactDist = ExactAlgorithm.GetExactDistance(graph1, graph2);
@@ -96,6 +96,27 @@ namespace Taio
             tmp = graph[i, j];
             graph[i, j] = graph[j, j];
             graph[j, j] = tmp;
+        }
+
+        public static bool AskUserWhetherCalculateBigGraph(bool[,] graph1, bool[,] graph2)
+        {
+            if (Math.Max(graph1.GetLength(0), graph2.GetLength(0)) > 10)
+            {
+                ConsoleKey response;
+                Console.WriteLine("Computations of the exact algorithm may take a long time due to the size of input graphs.");
+                do
+                {
+                    Console.Write($"Do you want to continue it's computations? [y/n] ");
+                    response = Console.ReadKey(false).Key;
+                    if (response != ConsoleKey.Enter)
+                    {
+                        Console.WriteLine();
+                    }
+                } while (response != ConsoleKey.Y && response != ConsoleKey.N);
+
+                return (response == ConsoleKey.Y);
+            }
+            return true;
         }
     }
 }

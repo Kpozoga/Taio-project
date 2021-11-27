@@ -67,7 +67,8 @@ namespace Taio
 
             Approximation.CalculateApproximation(graph1, graph2);
 
-            ExactAlgorithm.calculateExactAlgorithm(graph1, graph2);
+            if (ExactAlgorithm.AskUserWhetherCalculateBigGraph(graph1, graph2))
+                ExactAlgorithm.CalculateExactAlgorithm(graph1, graph2);
 
             Console.WriteLine("Please, press any key to continue...");
             try
