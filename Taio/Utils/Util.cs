@@ -98,7 +98,7 @@ namespace Taio.Utils
                 }
             }
             int n2 = int.Parse(lines[n1 + 1]);
-            var graph2 = new bool[n1, n1];
+            var graph2 = new bool[n2, n2];
             for (int i = 0; i < n2; i++)
             {
                 var line = lines[n1+i+2];
