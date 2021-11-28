@@ -159,6 +159,9 @@ namespace Taio
         {
             Console.WriteLine("---Approximation algorithm---");
             var result = Approximation.GetDistance(graph1, graph2);
+            //only for tests
+            Program.sw.Write(result.distance);
+            //end
             Util.WriteGraph(graph1, graph2, "graph1", "graph2", result.nodes);
             Console.WriteLine("Distance between the graphs above: {0}", result.distance);
             Console.WriteLine();

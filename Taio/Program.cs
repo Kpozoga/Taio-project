@@ -1,12 +1,21 @@
 ﻿using System;
+using System.IO;
+using System.Timers;
 using Taio.Utils;
 
 namespace Taio
 {
     class Program
     {
+        //only for tests
+        public static StreamWriter sw;
+        //end
         static void Main(string[] args)
         {
+            //only for tests
+            FileStream aFile = new FileStream("tests.txt", FileMode.Append, FileAccess.Write);
+            sw = new StreamWriter(aFile);
+            //end
             bool[,] graph1 = null, graph2 = null;
             bool pr = true;
             bool computeExact = true;
@@ -69,14 +78,30 @@ namespace Taio
             Console.WriteLine("---Graphs extracted from the file---");
             Util.PrintGraphs(graph1, graph2, "graph 1", "graph 2");
             Console.WriteLine();
-
+            
+            var watch = new System.Diagnostics.Stopwatch();
+            watch.Start();
             Approximation.CalculateApproximation(graph1, graph2);
-
+            watch.Stop();
+            Console.WriteLine($"Approximation algorithm execution time: {watch.ElapsedMilliseconds} ms");
+            //only for tests
+            sw.WriteLine($" {watch.ElapsedMilliseconds}");
+            //end
             if (computeExact)
                 if (ExactAlgorithm.AskUserWhetherCalculateBigGraph(graph1, graph2))
+                {
+                    watch.Restart();
                     ExactAlgorithm.CalculateExactAlgorithm(graph1, graph2);
+                    watch.Stop();
+                    Console.WriteLine($"Exact algorithm execution time: {watch.ElapsedMilliseconds} ms");
+                }
 
             Console.WriteLine("Please, press any key to continue...");
+            //only for tests
+            sw.Close();
+            aFile.Close();
+            return;
+            //end
             try
             {
                 Console.ReadKey();
